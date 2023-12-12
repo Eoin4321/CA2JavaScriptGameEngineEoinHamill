@@ -8,6 +8,7 @@ import Enemy from './enemy.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
+import AudioManager from '../engine/audioManager.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -19,11 +20,13 @@ class Player extends GameObject {
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
     // Initialize all the player specific properties
+    this.audioManager = new AudioManager();
     this.direction = 1;
     this.lives = 3;
     this.score = 0;
     this.isOnPlatform = false;
     this.isJumping = false;
+    this.isDoubleJumping = false;
     this.jumpForce = 400;
     this.jumpTime = 0.3;
     this.jumpTimer = 0;
@@ -41,10 +44,10 @@ class Player extends GameObject {
     
     // Handle player movement
     if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
-      physics.velocity.x = 100;
+      physics.velocity.x = 200;
       this.direction = -1;
     } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
-      physics.velocity.x = -100;
+      physics.velocity.x = -200;
       this.direction = 1;
     } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
@@ -151,6 +154,20 @@ class Player extends GameObject {
       this.jumpTimer = this.jumpTime;
       this.getComponent(Physics).velocity.y = -this.jumpForce;
       this.isOnPlatform = false;
+
+      // play jump sound from the audioManager
+      this.audioManager.jumpSound();
+
+    }
+  }
+
+  startDoubleJump() {
+    // Initiate a jump if the player is on a platform
+    if (!this.isOnPlatform && this.isJumping==true) { 
+      this.isJumping = true;
+      this.jumpTimer = this.jumpTime;
+      this.getComponent(Physics).velocity.y = -this.jumpForce;
+      this.isOnPlatform = false;
     }
   }
   
@@ -196,6 +213,7 @@ class Player extends GameObject {
     this.direction = 1;
     this.isOnPlatform = false;
     this.isJumping = false;
+    this.isDoubleJumping = false;
     this.jumpTimer = 0;
   }
 

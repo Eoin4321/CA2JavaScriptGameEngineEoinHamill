@@ -6,10 +6,16 @@ const Images = {
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
-  jump: './resources/audio/jump.mp3', // The file path of the jump sound.
-  collect: './resources/audio/collect.mp3', // The file path of the collect sound.
+  jump: new Audio(), // The file path of the jump sound.
+  collect: new Audio(), // The file path of the collect sound.
   // Add more audio file paths as needed
 };
+
+//Set the source of the jump sound.C:\Users\kay\Desktop\!!!!!!CA2JavaScript\CA2JavaScriptGameEngineEoinHamill\FullGameEngine\2023-GD2-2DGameEngine-master\src\jsGameEngine\resources\images\audio
+AudioFiles.jump.src = './resources/images/audio/jump.mp3'; // Update the audio path
+
+//Set the source of the collect sound.
+AudioFiles.collect.src = './resources/images/audio/collect.mp3'; // Update the audio path
 
 // Set the source of the player image.
 Images.player.src = './resources/images/player/player.png'; // Update the image path
