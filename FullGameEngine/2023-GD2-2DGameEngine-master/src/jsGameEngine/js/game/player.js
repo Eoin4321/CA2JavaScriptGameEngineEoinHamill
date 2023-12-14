@@ -9,6 +9,7 @@ import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
 import AudioManager from '../engine/audioManager.js';
+import animationManager from '../engine/animationManager.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -20,6 +21,10 @@ class Player extends GameObject {
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
     // Initialize all the player specific properties
+    this.addComponent(new animationManager());
+    this.getComponent(animationManager).addAnimation([Images.player]);
+    this.getComponent(animationManager).addAnimation([Images.player3, Images.player2]);  
+
     this.audioManager = new AudioManager();
     this.direction = 1;
     this.lives = 3;
@@ -27,12 +32,14 @@ class Player extends GameObject {
     this.isOnPlatform = false;
     this.isJumping = false;
     this.isDoubleJumping = false;
-    this.jumpForce = 400;
+    this.jumpForce = 15;
     this.jumpTime = 0.3;
     this.jumpTimer = 0;
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
+    
+
   }
 
   // The update function runs every frame and contains game logic
@@ -44,10 +51,10 @@ class Player extends GameObject {
     
     // Handle player movement
     if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
-      physics.velocity.x = 200;
+      physics.velocity.x = 15;
       this.direction = -1;
     } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
-      physics.velocity.x = -200;
+      physics.velocity.x = -15;
       this.direction = 1;
     } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
@@ -79,19 +86,19 @@ class Player extends GameObject {
       }
     }
   
-    // Handle collisions with platforms
-    this.isOnPlatform = false;  // Reset this before checking collisions with platforms
-    const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
-    for (const platform of platforms) {
-      if (physics.isColliding(platform.getComponent(Physics))) {
-        if (!this.isJumping) {
-          physics.velocity.y = 0;
-          physics.acceleration.y = 0;
-          this.y = platform.y - this.renderer.height;
-          this.isOnPlatform = true;
-        }
-      }
-    }
+    // // Handle collisions with platforms
+    // this.isOnPlatform = false;  // Reset this before checking collisions with platforms
+    // const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
+    // for (const platform of platforms) {
+    //   if (physics.isColliding(platform.getComponent(Physics))) {
+    //     if (!this.isJumping) {
+    //       physics.velocity.y = 0;
+    //       physics.acceleration.y = 0;
+    //       this.y = platform.y - this.renderer.height;
+    //       this.isOnPlatform = true;
+    //     }
+    //   }
+    // }
   
     // Check if player has fallen off the bottom of the screen
     if (this.y > this.game.canvas.height) {
@@ -108,6 +115,16 @@ class Player extends GameObject {
       console.log('You win!');
       location.reload();
     }
+
+    let anim = this.getComponent(animationManager);
+    if(physics.velocity.x == 0){
+      anim.currentAnimation = 0;
+    }
+    else{
+      anim.currentAnimation = 1;
+      anim.speed = 10;
+    }
+    
 
     super.update(deltaTime);
   }
@@ -158,16 +175,6 @@ class Player extends GameObject {
       // play jump sound from the audioManager
       this.audioManager.jumpSound();
 
-    }
-  }
-
-  startDoubleJump() {
-    // Initiate a jump if the player is on a platform
-    if (!this.isOnPlatform && this.isJumping==true) { 
-      this.isJumping = true;
-      this.jumpTimer = this.jumpTime;
-      this.getComponent(Physics).velocity.y = -this.jumpForce;
-      this.isOnPlatform = false;
     }
   }
   

@@ -28,7 +28,7 @@ class Enemy extends GameObject {
     
     // Add a Physics component to this enemy, responsible for managing its physical interactions
     // Sets the initial velocity and acceleration
-    this.addComponent(new Physics({ x: 50, y: 0 }, { x: 0, y: 0 }));
+    
     
     // Initialize variables related to enemy's movement
     this.movementDistance = 0;
@@ -54,7 +54,6 @@ class Enemy extends GameObject {
         this.movingRight = false;
         this.movementDistance = 0;
       }
-      this.getComponent(Physics).velocity.y = -this.jumpForce;
     } else {
       // If it hasn't reached its movement limit, make it move left
       if (this.movementDistance < this.movementLimit) {

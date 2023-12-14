@@ -1,7 +1,10 @@
 // Create an Images object to hold the Image instances for the player and the enemy.
 const Images = {
   player: new Image(), // The Image instance for the player.
+  player2: new Image(), // The Image instance for the player frame 2.
   enemy: new Image(), // The Image instance for the enemy.
+  player3: new Image(), // The Image instance for the player frame 2.
+  
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
@@ -18,7 +21,9 @@ AudioFiles.jump.src = './resources/images/audio/jump.mp3'; // Update the audio p
 AudioFiles.collect.src = './resources/images/audio/collect.mp3'; // Update the audio path
 
 // Set the source of the player image.
-Images.player.src = './resources/images/player/player.png'; // Update the image path
+Images.player.src = './resources/images/player/player.jpg'; // Update the image path
+Images.player2.src = './resources/images/player/player.png'; // Update the image path
+Images.player3.src = './resources/images/player/maddad.png'; // Update the image path
 
 // Set the source of the enemy image.
 Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path
