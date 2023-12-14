@@ -24,20 +24,21 @@ class Player extends GameObject {
     this.addComponent(new animationManager());
     this.getComponent(animationManager).addAnimation([Images.player]);
     this.getComponent(animationManager).addAnimation([Images.player3, Images.player2]);  
-
+    this.isJumpKeyDown = false; // Add this line
     this.audioManager = new AudioManager();
     this.direction = 1;
     this.lives = 3;
     this.score = 0;
     this.isOnPlatform = false;
     this.isJumping = false;
-    this.isDoubleJumping = false;
     this.jumpForce = 15;
     this.jumpTime = 0.3;
     this.jumpTimer = 0;
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
+    this.jumpCounter = 0;
+    
     
 
   }
@@ -60,9 +61,13 @@ class Player extends GameObject {
       physics.velocity.x = 0;
     }
 
-    // Handle player jumping
-    if (!this.isGamepadJump && input.isKeyDown('ArrowUp') && this.isOnPlatform) {
-      this.startJump();
+    if (!this.isGamepadJump && input.isKeyDown('ArrowUp')) {
+      if (!this.isJumpKeyDown) {
+        this.startJump();
+      }
+      this.isJumpKeyDown = true;
+    } else {
+      this.isJumpKeyDown = false;
     }
 
     if (this.isJumping) {
@@ -167,6 +172,8 @@ class Player extends GameObject {
   startJump() {
     // Initiate a jump if the player is on a platform
     if (this.isOnPlatform) { 
+      console.log("single jump");
+      console.log("Your jump counter is "+this.jumpCounter);
       this.isJumping = true;
       this.jumpTimer = this.jumpTime;
       this.getComponent(Physics).velocity.y = -this.jumpForce;
@@ -175,6 +182,16 @@ class Player extends GameObject {
       // play jump sound from the audioManager
       this.audioManager.jumpSound();
 
+    }
+    else if(!this.isOnPlatform && this.jumpCounter < 1){
+      console.log("double jump");
+      this.isJumping = true;
+      this.jumpTimer = this.jumpTime;
+      this.getComponent(Physics).velocity.y = -this.jumpForce;
+      this.isOnPlatform = false;
+      this.jumpCounter++;
+      // play jump sound from the audioManager
+      this.audioManager.jumpSound();
     }
   }
   

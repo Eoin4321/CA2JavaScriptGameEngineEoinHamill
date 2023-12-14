@@ -2,6 +2,7 @@
 import Component from './component.js';
 import Renderer from './renderer.js';
 import Platform from '../game/platform.js';
+import Player from '../game/player.js';
 
 // The Physics class extends Component and handles the physics behavior of a game object.
 class Physics extends Component {
@@ -28,8 +29,7 @@ class Physics extends Component {
         this.gameObject.x -= Math.sign(this.velocity.x);
         this.velocity.x = 0;
         break;
-      
-        }
+      }
       }
      
     }
@@ -42,6 +42,8 @@ class Physics extends Component {
           this.gameObject.y -= Math.sign(this.velocity.y);
           this.velocity.y = 0;
           this.gameObject.isOnPlatform = true;
+          this.gameObject.jumpCounter =0;
+
           break;
       
         }
