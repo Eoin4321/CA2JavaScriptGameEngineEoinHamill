@@ -16,14 +16,17 @@ class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
   constructor(x, y) {
     super(x, y); // Call parent's constructor
-    this.renderer = new Renderer('blue', 50, 50, Images.player); // Add renderer
+    this.renderer = new Renderer('blue', 50, 50, Images.idle1); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
     // Initialize all the player specific properties
     this.addComponent(new animationManager());
-    this.getComponent(animationManager).addAnimation([Images.player]);
+    this.getComponent(animationManager).addAnimation([Images.idle1, Images.idle2, Images.idle3, Images.idle4]);
     this.getComponent(animationManager).addAnimation([Images.player3, Images.player2]);  
+    this.getComponent(animationManager).addAnimation([Images.run1, Images.run2, Images.run3, Images.run4, Images.run5, Images.run6, Images.run7, Images.run8]);
+    this.getComponent(animationManager).addAnimation([Images.jump2, Images.jump3]);
+    this.getComponent(animationManager).addAnimation([Images.jump1]); //Fall animation 4 
     this.isJumpKeyDown = false; // Add this line
     this.audioManager = new AudioManager();
     this.direction = 1;
@@ -122,13 +125,25 @@ class Player extends GameObject {
     }
 
     let anim = this.getComponent(animationManager);
-    if(physics.velocity.x == 0){
+    if(physics.velocity.y < -1){
+      anim.currentAnimation = 4;
+      anim.animationspeed = 1;
+    }
+    else if(physics.velocity.y > 0){
+      anim.currentAnimation = 3;
+      anim.animationspeed = 4;
+    }
+    else if(physics.velocity.x == 0){
       anim.currentAnimation = 0;
+      anim.animationspeed = 6;
     }
     else{
-      anim.currentAnimation = 1;
-      anim.speed = 10;
+      anim.currentAnimation = 2;
+      anim.animationspeed = 30;
     }
+    
+
+    
     
 
     super.update(deltaTime);

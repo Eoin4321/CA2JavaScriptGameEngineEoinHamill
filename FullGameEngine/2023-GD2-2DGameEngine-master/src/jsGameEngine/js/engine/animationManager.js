@@ -9,7 +9,7 @@ constructor(){
     super();
     this.animations = []; 
     this.frame = 0;
-    this.animationspeed = 1;
+    this.animationspeed = 6;
     this.currentAnimation = 0;
 }
 
