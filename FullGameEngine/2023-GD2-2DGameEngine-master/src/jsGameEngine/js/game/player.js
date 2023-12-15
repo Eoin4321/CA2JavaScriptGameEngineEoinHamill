@@ -31,7 +31,7 @@ class Player extends GameObject {
     this.score = 0;
     this.isOnPlatform = false;
     this.isJumping = false;
-    this.jumpForce = 15;
+    this.jumpForce = 18;
     this.jumpTime = 0.3;
     this.jumpTimer = 0;
     this.isInvulnerable = false;
@@ -183,7 +183,7 @@ class Player extends GameObject {
       this.audioManager.jumpSound();
 
     }
-    else if(!this.isOnPlatform && this.jumpCounter < 1){
+    else if(!this.isOnPlatform && this.jumpCounter < 5){
       console.log("double jump");
       this.isJumping = true;
       this.jumpTimer = this.jumpTime;
