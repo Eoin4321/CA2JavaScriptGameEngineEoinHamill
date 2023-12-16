@@ -188,6 +188,7 @@ class Player extends GameObject {
   startJump() {
     // Initiate a jump if the player is on a platform
     if (this.isOnPlatform) { 
+      this.emitParticles('brown','brown',3,1,1);
       console.log("single jump");
       console.log("Your jump counter is "+this.jumpCounter);
       this.isJumping = true;
@@ -201,6 +202,7 @@ class Player extends GameObject {
     }
     else if(!this.isOnPlatform && this.jumpCounter < 5){
       console.log("double jump");
+      this.emitParticles('black','brown',5,1,1);
       this.isJumping = true;
       this.jumpTimer = this.jumpTime;
       this.getComponent(Physics).velocity.y = -this.jumpForce;
@@ -223,6 +225,7 @@ class Player extends GameObject {
     // Checks collision with an enemy and reduce player's life if not invulnerable
     if (!this.isInvulnerable) {
       this.lives--;
+      this.emitParticles('red','orange',10,10,10);
       this.isInvulnerable = true;
       // Make player vulnerable again after 2 seconds
       setTimeout(() => {
@@ -235,13 +238,14 @@ class Player extends GameObject {
     // Handle collectible pickup
     this.score += collectible.value;
     console.log(`Score: ${this.score}`);
-    this.emitCollectParticles(collectible);
+    
+    this.emitParticles('black','white',10,10,10);
   }
 
-  emitCollectParticles() {
+  emitParticles(colour1,colour2,amount,lifeDuration,emitDuration) {
     // Create a particle system at the player's position when a collectible is collected
     //Colour, Particles emitted, Life duration, Emit duration
-    const particleSystem = new ParticleSystem(this.x, this.y, 'gold',10, 10, 10);
+    const particleSystem = new ParticleSystem(this.x, this.y, [colour1, colour2],amount, lifeDuration, emitDuration);
     this.game.addGameObject(particleSystem);
   }
 

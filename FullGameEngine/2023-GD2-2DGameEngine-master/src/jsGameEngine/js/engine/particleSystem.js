@@ -6,11 +6,11 @@ import Physics from '../engine/physics.js';
 // The ParticleSystem class extends GameObject and is responsible for creating and managing a system of particles.
 class ParticleSystem extends GameObject {
   // The constructor method initializes a new instance of the ParticleSystem class.
-  constructor(x, y, color, count, lifeDuration, emitDuration) {
+  constructor(x, y, colour, count, lifeDuration, emitDuration) {
     // Call the constructor of the parent class (GameObject) and pass the position of the particle system.
     super(x, y);
     // Initialize instance properties.
-    this.color = color; // Color of the particles.
+    this.colour = colour; // Array of Colour of the particles.
     this.count = count; // Total number of particles to emit.
     this.lifeDuration = lifeDuration; // The life duration of each particle.
     this.emitDuration = emitDuration; // Duration over which particles should be emitted.
@@ -42,14 +42,14 @@ class ParticleSystem extends GameObject {
       // Create a new particle with a random life duration, size, and initial velocity.
       const lifeDuration = this.lifeDuration + Math.random() - 0.5;
 
-      const color = Math.random() > 0.5 ? 'black' : 'white';
-
+      const randomColour = Math.floor(Math.random() * this.colour.length);
+const colour = this.colour[randomColour];
       const particle = new Particle(
       this.x,
       this.y,
       Math.random() * 25,
       Math.random() * 25,
-      color,
+      colour,
       lifeDuration);
       particle.addComponent(new Physics({ x: (Math.random() - 0.5) * 50, y: (Math.random() - 0.5) * 50 }, { x: 0, y: 0 }));
 
