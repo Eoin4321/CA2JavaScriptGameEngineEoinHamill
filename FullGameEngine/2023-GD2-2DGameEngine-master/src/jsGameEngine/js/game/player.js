@@ -241,7 +241,7 @@ class Player extends GameObject {
   emitCollectParticles() {
     // Create a particle system at the player's position when a collectible is collected
     //Colour, Particles emitted, Life duration, Emit duration
-    const particleSystem = new ParticleSystem(this.x, this.y, Images.idle1, 10, 10, 10);
+    const particleSystem = new ParticleSystem(this.x, this.y, 'gold',10, 10, 10);
     this.game.addGameObject(particleSystem);
   }
 

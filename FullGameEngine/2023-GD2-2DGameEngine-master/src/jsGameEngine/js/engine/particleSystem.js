@@ -41,18 +41,19 @@ class ParticleSystem extends GameObject {
     for (let i = 0; i < particlesToEmit && this.particlesEmitted < this.count; i++) {
       // Create a new particle with a random life duration, size, and initial velocity.
       const lifeDuration = this.lifeDuration + Math.random() - 0.5;
+
+      const color = Math.random() > 0.5 ? 'black' : 'white';
+
       const particle = new Particle(
       this.x,
       this.y,
-      Math.random() * 50,
-      Math.random() * 50,
-      this.color,
+      Math.random() * 25,
+      Math.random() * 25,
+      color,
       lifeDuration);
       particle.addComponent(new Physics({ x: (Math.random() - 0.5) * 50, y: (Math.random() - 0.5) * 50 }, { x: 0, y: 0 }));
 
-      const size = Math.random() * 1000+10;
-      particle.width = size;
-      particle.height = size;
+      
       //Code to change scale and rotation test
       particle.rotation = Math.random() * 360; 
       particle.scale = Math.random() * 2;
