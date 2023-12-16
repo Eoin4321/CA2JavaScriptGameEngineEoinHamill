@@ -7,9 +7,9 @@ body {
     background-image: url('/resources/images/player/jump/jump3.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: #0052f6;
+    background-color: #908f8f;
 }
 
 canvas {
-    border: 1px solid #fff;
+    border: 1px solid #000000;
 }

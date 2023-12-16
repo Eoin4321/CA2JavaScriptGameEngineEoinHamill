@@ -21,13 +21,17 @@ const Images = {
   jump3: new Image(), //
   floor1: new Image(), //
   wall1: new Image(), //
+  heart: new Image(), //
   
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
   jump: new Audio(), // The file path of the jump sound.
-  collect: new Audio(), // The file path of the collect sound.
+  ghostcollectible: new Audio(), // The file path of the collect sound.
+  doublejump: new Audio(),
+  victory: new Audio(),
+  damage: new Audio(),
   // Add more audio file paths as needed
 };
 
@@ -35,7 +39,10 @@ const AudioFiles = {
 AudioFiles.jump.src = './resources/images/audio/jump.mp3'; // Update the audio path
 
 //Set the source of the collect sound.
-AudioFiles.collect.src = './resources/images/audio/collect.mp3'; // Update the audio path
+AudioFiles.ghostcollectible.src = './resources/images/audio/ghostcollectible.mp3'; // Update the audio path
+AudioFiles.doublejump.src = './resources/images/audio/doublejump.mp3';
+AudioFiles.victory.src = './resources/images/audio/victory.mp3';
+AudioFiles.damage.src = './resources/images/audio/damage.mp3';
 
 // Set the source of the player image.
 Images.player.src = './resources/images/player/player.jpg'; // Update the image path
@@ -58,6 +65,8 @@ Images.jump2.src = './resources/images/player/jump/jump2.png'; // Update the ima
 Images.jump3.src = './resources/images/player/jump/jump3.png'; // Update the image path
 Images.floor1.src = './resources/images/tiles/floor.png'; // Update the image path
 Images.wall1.src = './resources/images/tiles/wall.png'; // Update the image path
+Images.heart.src = './resources/images/heart/heart.png'; // Update the image path
+
 
 // Set the source of the enemy image.
 Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path

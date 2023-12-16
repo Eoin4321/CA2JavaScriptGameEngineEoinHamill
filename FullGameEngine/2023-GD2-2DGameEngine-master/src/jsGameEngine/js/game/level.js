@@ -6,6 +6,7 @@ import PlayerUI from './playerUI.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import {Images} from '../engine/resources.js';
+import animationManager from '../engine/animationManager.js';
 
 // Define a class Level that extends the Game class from the engine
 class Level extends Game {
@@ -47,9 +48,9 @@ class Level extends Game {
     this.addGameObject(new Enemy(2 * (platformWidth + gap) + 50, this.canvas.height - 90));
 
     // Create collectibles and add them to the game
-    this.addGameObject(new Collectible(250, this.canvas.height - 100, 20, 20));
-    this.addGameObject(new Collectible(450, this.canvas.height - 100, 20, 20));
-    this.addGameObject(new Collectible(650, this.canvas.height - 100, 20, 20));
+    this.addGameObject(new Collectible(250, this.canvas.height - 100, 50, 50, 'gold' , Images.idle1,'collectible'));
+    this.addGameObject(new Collectible(450, this.canvas.height - 100, 50, 50, 'gold',Images.idle1,'collectible'));
+    this.addGameObject(new Collectible(650, this.canvas.height - 100, 50, 50,'gold', Images.heart,'heart'));
   }
   
 }

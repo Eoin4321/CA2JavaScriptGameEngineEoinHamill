@@ -121,26 +121,27 @@ class Player extends GameObject {
     // Check if player has collected all collectibles
     if (this.score >= 3) {
       console.log('You win!');
+      this.audioManager.victorySound();
       location.reload();
     }
 
     //Controling the sprites currently showing for my player
-    let anim = this.getComponent(animationManager);
+    let animation = this.getComponent(animationManager);
     if(physics.velocity.y < -1){
-      anim.currentAnimation = 4;
-      anim.animationspeed = 1;
+      animation.currentAnimation = 4;
+      animation.animationspeed = 1;
     }
     else if(physics.velocity.y > 0){
-      anim.currentAnimation = 3;
-      anim.animationspeed = 4;
+      animation.currentAnimation = 3;
+      animation.animationspeed = 4;
     }
     else if(physics.velocity.x == 0){
-      anim.currentAnimation = 0;
-      anim.animationspeed = 6;
+      animation.currentAnimation = 0;
+      animation.animationspeed = 6;
     }
     else{
-      anim.currentAnimation = 2;
-      anim.animationspeed = 30;
+      animation.currentAnimation = 2;
+      animation.animationspeed = 30;
     }
     
 
@@ -209,7 +210,7 @@ class Player extends GameObject {
       this.isOnPlatform = false;
       this.jumpCounter++;
       // play jump sound from the audioManager
-      this.audioManager.jumpSound();
+      this.audioManager.doublejumpSound();
     }
   }
   
@@ -222,6 +223,7 @@ class Player extends GameObject {
   }
 
   collidedWithEnemy() {
+    this.audioManager.damageSound();
     // Checks collision with an enemy and reduce player's life if not invulnerable
     if (!this.isInvulnerable) {
       this.lives--;
@@ -238,8 +240,16 @@ class Player extends GameObject {
     // Handle collectible pickup
     this.score += collectible.value;
     console.log(`Score: ${this.score}`);
-    
+    this.audioManager.ghostcollectibleSound();
     this.emitParticles('black','white',10,10,10);
+  }
+
+  collect(heart) {
+    // Handle collectible pickup
+    this.lives += heart.value;
+    console.log(`Score: ${this.score}`);
+    this.audioManager.ghostcollectibleSound();
+    this.emitParticles('red','red',10,10,10);
   }
 
   emitParticles(colour1,colour2,amount,lifeDuration,emitDuration) {
