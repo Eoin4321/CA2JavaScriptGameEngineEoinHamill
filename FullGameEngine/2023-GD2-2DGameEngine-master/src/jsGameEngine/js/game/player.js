@@ -238,20 +238,22 @@ class Player extends GameObject {
 
   collect(collectible) {
     // Handle collectible pickup
+    if(collectible.tag === 'collectible'){
     this.score += collectible.value;
     console.log(`Score: ${this.score}`);
     this.audioManager.ghostcollectibleSound();
     this.emitParticles('black','white',10,10,10);
-  }
-
-  collect(heart) {
+    }
+  else if(collectible.tag === 'heart'){
     // Handle collectible pickup
-    this.lives += heart.value;
+    this.lives += collectible.value;
     console.log(`Score: ${this.score}`);
     this.audioManager.ghostcollectibleSound();
     this.emitParticles('red','red',10,10,10);
   }
 
+  this.game.removeGameObject(collectible);
+  }
   emitParticles(colour1,colour2,amount,lifeDuration,emitDuration) {
     // Create a particle system at the player's position when a collectible is collected
     //Colour, Particles emitted, Life duration, Emit duration

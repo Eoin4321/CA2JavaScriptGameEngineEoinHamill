@@ -22,6 +22,8 @@ const Images = {
   floor1: new Image(), //
   wall1: new Image(), //
   heart: new Image(), //
+  ghost1: new Image(), //
+  ghost2: new Image(), //
   
 };
 
@@ -66,7 +68,8 @@ Images.jump3.src = './resources/images/player/jump/jump3.png'; // Update the ima
 Images.floor1.src = './resources/images/tiles/floor.png'; // Update the image path
 Images.wall1.src = './resources/images/tiles/wall.png'; // Update the image path
 Images.heart.src = './resources/images/heart/heart.png'; // Update the image path
-
+Images.ghost1.src = './resources/images/ghost/ghost1.png'; // Update the image path
+Images.ghost2.src = './resources/images/ghost/ghost2.png'; // Update the image path
 
 // Set the source of the enemy image.
 Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path

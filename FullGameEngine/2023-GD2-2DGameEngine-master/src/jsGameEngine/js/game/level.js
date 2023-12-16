@@ -6,7 +6,6 @@ import PlayerUI from './playerUI.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import {Images} from '../engine/resources.js';
-import animationManager from '../engine/animationManager.js';
 
 // Define a class Level that extends the Game class from the engine
 class Level extends Game {
@@ -32,11 +31,23 @@ class Level extends Game {
 
     // Create platforms and add them to the game
     const platforms = [
-      new Platform(0, this.canvas.height - 20, platformWidth, 20),
-      new Platform(platformWidth + gap, this.canvas.height - 20, 10* platformWidth, 20),
+      //horizontal, vertical, width , height, colour, sprite.
+      //Spawn platform
       new Platform(2 * (200 + 340), this.canvas.height - 450, 340, 100, 'gray', Images.floor1),
-      new Platform(2 * (200 + 480), this.canvas.height - 1000, 50, 400,'gray', Images.wall1),
-      new Platform(2 * (200 + 340), this.canvas.height - 1000, 50, 400, 'gray', Images.wall1)
+      //right wall
+      new Platform(2 * (200 + 480), this.canvas.height - 750, 50, 100,'gray', Images.wall1),
+      //left wall
+      new Platform(2 * (200 + 1040), this.canvas.height - 750, 50, 300, 'gray', Images.wall1),
+      new Platform(2 * (200 + 1040), this.canvas.height - 1000, 50, 300, 'gray', Images.wall1),
+      
+      new Platform(2 * (200 + 340), this.canvas.height - 750, 50, 300, 'gray', Images.wall1),
+      new Platform(2 * (200 + 500), this.canvas.height - 450, 340, 100, 'gray', Images.floor1),
+      new Platform(2 * (200 + 650), this.canvas.height - 450, 340, 100, 'gray', Images.floor1),
+      new Platform(2 * (200 + 900), this.canvas.height - 450, 340, 100, 'gray', Images.floor1),
+      //SECOND FLOOR
+      new Platform(2 * (200 + 170), this.canvas.height - 750, 340, 100, 'gray', Images.floor1),
+      new Platform(2 * (200 + -400), this.canvas.height - 750, 340, 100, 'gray', Images.floor1),
+      
     ];
     for (const platform of platforms) {
       this.addGameObject(platform);
@@ -48,9 +59,11 @@ class Level extends Game {
     this.addGameObject(new Enemy(2 * (platformWidth + gap) + 50, this.canvas.height - 90));
 
     // Create collectibles and add them to the game
-    this.addGameObject(new Collectible(250, this.canvas.height - 100, 50, 50, 'gold' , Images.idle1,'collectible'));
-    this.addGameObject(new Collectible(450, this.canvas.height - 100, 50, 50, 'gold',Images.idle1,'collectible'));
+    this.addGameObject(new Collectible(250, this.canvas.height - 100, 50, 50, 'gold' , Images.ghost2,'collectible'));
+    this.addGameObject(new Collectible(450, this.canvas.height - 100, 50, 50, 'gold',Images.ghost1,'collectible'));
     this.addGameObject(new Collectible(650, this.canvas.height - 100, 50, 50,'gold', Images.heart,'heart'));
+    //Making level
+    this.addGameObject(new Collectible(2350, this.canvas.height - 600, 50, 50, 'gold',Images.ghost1,'collectible'));
   }
   
 }
