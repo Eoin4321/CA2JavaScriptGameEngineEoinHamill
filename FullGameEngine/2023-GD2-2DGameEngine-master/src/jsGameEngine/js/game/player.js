@@ -124,6 +124,7 @@ class Player extends GameObject {
       location.reload();
     }
 
+    //Controling the sprites currently showing for my player
     let anim = this.getComponent(animationManager);
     if(physics.velocity.y < -1){
       anim.currentAnimation = 4;

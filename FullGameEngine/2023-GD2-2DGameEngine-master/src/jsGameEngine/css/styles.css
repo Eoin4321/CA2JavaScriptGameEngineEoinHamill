@@ -1,14 +1,15 @@
-/* Set margin, flex properties, height, and background color for the body */
 body {
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ffffff; /* Red background color */
+    background-image: url('/resources/images/player/jump/jump3.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #0052f6;
 }
 
-/* Add border to the canvas element */
 canvas {
-    border: 1px solid #fff; /* 1 pixel solid white border */
+    border: 1px solid #fff;
 }

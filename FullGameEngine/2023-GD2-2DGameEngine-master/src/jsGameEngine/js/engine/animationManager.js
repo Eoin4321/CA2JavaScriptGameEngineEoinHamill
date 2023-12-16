@@ -6,6 +6,7 @@ class animationManager extends Component{
 
 
 constructor(){
+    
     super();
     this.animations = []; 
     this.frame = 0;
@@ -18,10 +19,12 @@ addAnimation(animation){
 }
 
 update(deltaTime){
+
     this.frame += deltaTime * this.animationspeed;
     if(this.frame >= this.animations[this.currentAnimation].length){
         this.frame = 0;
     }
+
     let renderer = this.gameObject.getComponent(Renderer);
     renderer.image = this.animations[this.currentAnimation][Math.floor(this.frame)];
 }
