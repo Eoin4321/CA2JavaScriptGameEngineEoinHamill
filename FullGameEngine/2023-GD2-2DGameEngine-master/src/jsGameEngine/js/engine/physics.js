@@ -42,7 +42,7 @@ class Physics extends Component {
           this.gameObject.y -= Math.sign(this.velocity.y);
           this.velocity.y = 0;
           this.gameObject.isOnPlatform = true;
-          this.gameObject.jumpCounter =0;
+          this.gameObject.jumpCounter =5-this.gameObject.score;
 
           break;
       

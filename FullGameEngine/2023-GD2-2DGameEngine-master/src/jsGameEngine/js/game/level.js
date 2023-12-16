@@ -5,6 +5,7 @@ import Enemy from './enemy.js';
 import PlayerUI from './playerUI.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
+import {Images} from '../engine/resources.js';
 
 // Define a class Level that extends the Game class from the engine
 class Level extends Game {
@@ -31,10 +32,10 @@ class Level extends Game {
     // Create platforms and add them to the game
     const platforms = [
       new Platform(0, this.canvas.height - 20, platformWidth, 20),
-      new Platform(platformWidth + gap, this.canvas.height - 20, platformWidth, 20),
-      new Platform(2 * (200 + 360), this.canvas.height - 450, 250, 50),
-      new Platform(2 * (200 + 480), this.canvas.height - 1200, 50, 800),
-      new Platform(2 * (200 + 340), this.canvas.height - 1200, 50, 800)
+      new Platform(platformWidth + gap, this.canvas.height - 20, 10* platformWidth, 20),
+      new Platform(2 * (200 + 340), this.canvas.height - 450, 340, 100, 'gray', Images.floor1),
+      new Platform(2 * (200 + 480), this.canvas.height - 1000, 50, 400,'gray', Images.wall1),
+      new Platform(2 * (200 + 340), this.canvas.height - 1000, 50, 400, 'gray', Images.wall1)
     ];
     for (const platform of platforms) {
       this.addGameObject(platform);
