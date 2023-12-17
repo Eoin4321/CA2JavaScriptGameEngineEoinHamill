@@ -1,5 +1,8 @@
 # CA2JavaScriptGameEngineEoinHamill
+Youtube Video explaining code 
 https://www.youtube.com/watch?v=CSE1d2YEFSQ
+
+
 A repository for my CA2 Java Script Game Engine Project.
 
 In my game you play as a little ghost who has to go around collecting other ghosts. 
