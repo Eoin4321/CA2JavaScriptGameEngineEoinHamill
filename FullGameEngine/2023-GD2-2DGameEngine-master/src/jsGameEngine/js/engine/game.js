@@ -23,6 +23,7 @@ class Game {
     window.addEventListener('resize', () => this.resizeCanvas());
     // Instantiate a new camera without a target and with dimensions equal to the canvas size.
     this.camera = new Camera(null, this.canvas.width, this.canvas.height);
+    
   }
 
   // This method resizes the canvas to fill the window, with a small margin.
@@ -75,7 +76,11 @@ class Game {
     this.ctx.save();
     // Translate the canvas by the negative of the camera's position. This makes the camera follow its target.
     this.ctx.translate(-this.camera.x, -this.camera.y);
+    //Make the camera shake
+    
 
+
+    
     // Draw each game object on the canvas.
     for (const gameObject of this.gameObjects) {
       gameObject.draw(this.ctx);

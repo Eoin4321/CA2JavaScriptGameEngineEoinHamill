@@ -1,36 +1,27 @@
-import {Images} from '../engine/resources.js';
-import Renderer from "./renderer.js";
-import Component from './component.js';
+import { Images } from '../engine/resources.js';
 
-class animationManager extends Component{
-
-
-constructor(){
-
-    super();
-    this.animations = []; 
-    this.frame = 0;
-    this.animationspeed = 6;
-    this.currentAnimation = 0;
-}
-
-addAnimation(animation){
-    this.animations.push(animation);
-}
-
-update(deltaTime){
-    this.frame += deltaTime * this.animationspeed;
-    if(this.frame >= this.animations[this.currentAnimation].length){
-        this.frame = 0;
+class AnimationManager {
+    constructor(player) {
+        this.player = player;
     }
 
-    let renderer = this.gameObject.getComponent(Renderer);
-    if (renderer){
-    renderer.image = this.animations[this.currentAnimation][Math.floor(this.frame)];
-}
+    updateAnimation() {
+        const {physics, renderer} = this.player;
+
+        if (physics.velocity.y < -1) {
+            renderer.image = Images.jump1;
+        }
+        else if(physics.velocity.y > 0){
+            renderer.image = Images.jump2;
+        }
+        else if(physics.velocity.x == 0){
+            renderer.image = Images.idle1;
+        }
+        else{
+            renderer.image = Images.run1;
+        }
+
+    }
 }
 
-
-}
-
-export default animationManager;
+export default AnimationManager;

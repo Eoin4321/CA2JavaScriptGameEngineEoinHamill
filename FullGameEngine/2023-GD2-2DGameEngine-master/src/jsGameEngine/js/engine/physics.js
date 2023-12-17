@@ -21,11 +21,16 @@ class Physics extends Component {
     this.velocity.x += this.acceleration.x * deltaTime;
     this.velocity.y += (this.acceleration.y + this.gravity.y) * deltaTime;
 
+    //Getting all the platforms in the game
     const platforms = this.gameObject.game.gameObjects.filter((obj) => obj instanceof Platform);
-  for(let i = 0; i < Math.abs(this.velocity.x); i++) {
+  
+    // Run a for loop to check the horizontal position with
+    for(let i = 0; i < Math.abs(this.velocity.x); i++) {
     this.gameObject.x += Math.sign(this.velocity.x);
+    //for loop to check collision with each platform
     for (const platform of platforms) {
       if (this.isColliding(platform.getComponent(Physics))) {
+        //Then if colliding you move the player back to the previous position and stop horizontal movement
         this.gameObject.x -= Math.sign(this.velocity.x);
         this.velocity.x = 0;
         break;
@@ -34,11 +39,15 @@ class Physics extends Component {
      
     }
     this.gameObject.isOnPlatform = false;
+
+    // Update vertical position while checking collision with platforms. Same as other loop but for vertical movement
     for(let i=0;i<Math.abs(this.velocity.y);i++)
     {
       this.gameObject.y += Math.sign(this.velocity.y);
+      // Checking collisions with each platform
       for (const platform of platforms) {
         if (this.isColliding(platform.getComponent(Physics))) {
+          // If colliding revert position and stop vertical movement
           this.gameObject.y -= Math.sign(this.velocity.y);
           this.velocity.y = 0;
           this.gameObject.isOnPlatform = true;

@@ -9,7 +9,7 @@ class AudioManager {
         this.victory = new Audio(AudioFiles.victory.src);
         this.damage = new Audio(AudioFiles.damage.src);
     }
-
+    
     jumpSound() {
         this.jump.play();
     }

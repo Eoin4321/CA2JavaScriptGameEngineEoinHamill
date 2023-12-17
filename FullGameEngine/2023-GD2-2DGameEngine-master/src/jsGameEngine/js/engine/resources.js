@@ -1,8 +1,8 @@
-// Create an Images object to hold the Image instances for the player and the enemy.
+// Create an Images object to hold the Image instances for the player 
 const Images = {
   player: new Image(), // The Image instance for the player.
   player2: new Image(), // The Image instance for the player frame 2.
-  enemy: new Image(), // The Image instance for the enemy.
+
   player3: new Image(), // The Image instance for the player frame 2.
   idle1: new Image(), // 
   idle2: new Image(), // 
@@ -71,8 +71,6 @@ Images.heart.src = './resources/images/heart/heart.png'; // Update the image pat
 Images.ghost1.src = './resources/images/ghost/ghost1.png'; // Update the image path
 Images.ghost2.src = './resources/images/ghost/ghost2.png'; // Update the image path
 
-// Set the source of the enemy image.
-Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path
 
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };
