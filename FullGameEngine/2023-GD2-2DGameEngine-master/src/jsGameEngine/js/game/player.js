@@ -9,7 +9,7 @@ import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
 import AudioManager from '../engine/audioManager.js';
-import AnimationManager from '../engine/animationManager.js';
+//import AnimationManager from '../engine/animationManager.js';
 import Camera from '../engine/camera.js';
 
 // Defining a class Player that extends GameObject
