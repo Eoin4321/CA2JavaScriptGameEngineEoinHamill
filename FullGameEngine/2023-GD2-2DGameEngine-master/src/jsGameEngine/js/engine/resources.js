@@ -1,4 +1,6 @@
 // Create an Images object to hold the Image instances for the player 
+
+
 const Images = {
   player: new Image(), // The Image instance for the player.
   player2: new Image(), // The Image instance for the player frame 2.

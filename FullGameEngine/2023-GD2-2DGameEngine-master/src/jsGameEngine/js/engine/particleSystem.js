@@ -33,6 +33,7 @@ class ParticleSystem extends GameObject {
     super.update(deltaTime);
   }
 
+  //CoPilot helped me write this method
   // The emitParticles method is responsible for creating and emitting particles.
   emitParticles(deltaTime) {
     // Calculate how many particles to emit in this frame.
@@ -43,10 +44,12 @@ class ParticleSystem extends GameObject {
       const lifeDuration = this.lifeDuration + Math.random() - 0.5;
 
       const randomColour = Math.floor(Math.random() * this.colour.length);
-const colour = this.colour[randomColour];
+const colour = this.colour[randomColour]; //Setting randomcolour based on arraylist taken in
       const particle = new Particle(
-      this.x,
+        //position of particle
+      this.x, 
       this.y,
+      //random width height
       Math.random() * 25,
       Math.random() * 25,
       colour,

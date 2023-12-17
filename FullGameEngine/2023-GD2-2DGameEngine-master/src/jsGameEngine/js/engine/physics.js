@@ -22,15 +22,15 @@ class Physics extends Component {
     this.velocity.y += (this.acceleration.y + this.gravity.y) * deltaTime;
 
     //Getting all the platforms in the game
+    //Most of this code was assisted with by Copilot
     const platforms = this.gameObject.game.gameObjects.filter((obj) => obj instanceof Platform);
-  
     // Run a for loop to check the horizontal position with
     for(let i = 0; i < Math.abs(this.velocity.x); i++) {
     this.gameObject.x += Math.sign(this.velocity.x);
     //for loop to check collision with each platform
     for (const platform of platforms) {
       if (this.isColliding(platform.getComponent(Physics))) {
-        //Then if colliding you move the player back to the previous position and stop horizontal movement
+        //Then if colliding move the player back to the previous position and stop horizontal movement
         this.gameObject.x -= Math.sign(this.velocity.x);
         this.velocity.x = 0;
         break;

@@ -4,7 +4,7 @@ import Renderer from '../engine/renderer.js';
 import Physics from '../engine/physics.js';
 import Input from '../engine/input.js';
 import { Images } from '../engine/resources.js';
-
+import GameManger from '../engine/gameManager.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
@@ -17,7 +17,7 @@ class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
   constructor(x, y) {
     super(x, y); // Call parent's constructor
-    
+    this.gameManager = new GameManger(this);
     this.renderer = new Renderer('blue', 50, 50, Images.idle1); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
@@ -101,7 +101,7 @@ class Player extends GameObject {
     // Check if player has fallen off the bottom of the screen
     if (this.y > this.game.canvas.height) {
       this.lives--;
-      this.resetPlayerState();
+      this.gameManager.resetPlayerState();
     }
 
     // Check if player has no lives left
@@ -213,6 +213,7 @@ if(collectible.tag === 'collectible'){
     this.score += collectible.value;
     
     this.audioManager.ghostcollectibleSound();
+    //Take in colour amount, lifeduration and emit duration
     this.emitParticles('black','white',5,2,2);
   }
 else if(collectible.tag === 'heart'){
@@ -232,24 +233,8 @@ this.game.removeGameObject(collectible);
     this.game.addGameObject(particleSystem);
   }
 
-  resetPlayerState() {
-    // Reset the player's state, repositioning it and nullifying movement
-    this.x = this.game.canvas.width / 2;
-    this.y = this.game.canvas.height / 2;
-    this.getComponent(Physics).velocity = { x: 0, y: 0 };
-    this.getComponent(Physics).acceleration = { x: 0, y: 0 };
-    this.direction = 1;
-    this.isOnPlatform = false;
-    this.isJumping = false;
-    this.isDoubleJumping = false;
-    this.jumpTimer = 0;
-  }
-
   resetGame() {
-    // Reset the game state, which includes the player's state
-    this.lives = 3;
-    this.score = 0;
-    this.resetPlayerState();
+    this.gameManager.resetGame();
   }
 }
 
